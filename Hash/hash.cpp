@@ -10,12 +10,13 @@ using namespace std;
 
 class Hash {
 	typedef long long ll;
-public:
+
 	string s;
 	ll P;
 	vector <ll> MOD;
 	vector <vector <ll> > POW;
 	vector <vector <ll> > Hashes;
+public:
 
 	void initHashes() {
 		Hashes.resize(s.size(), vector <ll> (MOD.size(), 0));
@@ -60,7 +61,7 @@ public:
 		return (HashR - HashL + mmod) % mmod;
 	}
 
-	bool substringEqals(Hash & a, Hash & b, int aL, int aR, int bL, int bR) {
+	bool substringEquals(Hash & a, Hash & b, int aL, int aR, int bL, int bR) {
 		int nMOD = max(a.MOD.size(), b.MOD.size());
 		for (int i = 0; i < nMOD; i++) {
 			if (a.MOD[i] != b.MOD[i])
@@ -71,8 +72,12 @@ public:
 		return true;
 	}
 
-	bool substringEqals(Hash & other, int aL, int aR, int bL, int bR) {
-		return substringEqals((*this), other, aL, aR, bL, bR);  // ????
+	bool substringEquals(Hash & other, int aL, int aR, int bL, int bR) {
+		return substringEquals((*this), other, aL, aR, bL, bR);  // ????
+	}
+
+	string getString() {
+		return s;
 	}
 
 };
@@ -90,6 +95,6 @@ int main() {
 	myMod[1] = 1e9 + 9;
 	Hash ah(a, myMod, 37);
 	Hash bh(b, myMod, 37);
-	cout << ah.substringEqals(bh, l1, r1, l2, r2);
+	cout << (ah.substringEquals(bh, l1, r1, l2, r2) ? "Equal" : "Not equal") << endl;
 	return 0;
 }
